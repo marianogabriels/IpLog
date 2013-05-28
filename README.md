@@ -1,6 +1,6 @@
 # Iplog
 
-TODO: Write a gem description
+gem description
 
 ## Installation
 
@@ -17,8 +17,6 @@ Or install it yourself as:
     $ gem install iplog
 
 ## Usage
-
-TODO: Write usage instructions here
 
 ## Contributing
 

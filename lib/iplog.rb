@@ -14,12 +14,13 @@ module Iplog
    def run_script(test=false,sleep_time = 60)
      generate_uri
      configliere_setup unless test
-     sleep_time == Settings[:sleep_time] unless Settings[:sleep_time].empty?
+     sleep_time = Settings[:sleep_time] unless Settings[:sleep_time].empty?
 
      loop do
      add_ip_to_log if last_ip_from_log != current_ip
      sleep(sleep_time)
      end
+
    end
 
    def generate_uri
