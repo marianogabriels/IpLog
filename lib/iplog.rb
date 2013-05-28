@@ -4,20 +4,6 @@ require 'configliere'
 require 'fileutils'
 
 module Iplog
-  #
-  #  def configliere_setup(config_path=__dir__)
-  #    Settings.read("#{config_path}/config.yaml")
-  #    @@log_path = Settings[:log_path]
-  # end
-
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
 
  class << self
    def configliere_setup(config_path=__dir__)
