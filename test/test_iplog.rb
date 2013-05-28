@@ -1,5 +1,6 @@
 require 'test/unit'
 require_relative '../lib/iplog.rb'
+require 'net/http'
 
 class IplogTests < Test::Unit::TestCase
 include Iplog
@@ -7,7 +8,7 @@ include Iplog
   Settings.read("#{__dir__}/config.yaml")
 
   def testrun_script
-    #Iplog.run_script(true)
+    Iplog.run_script(true)
   end
 
   def test_Iplog
@@ -15,7 +16,9 @@ include Iplog
   end
 
   def test_method_current_ip
-    assert_equal(Iplog.current_ip, "127.0.0.1")
+    uri = URI("http://127.0.0.1")
+    uri.port = 4567
+    assert_equal(Iplog.current_ip(uri),"127.0.0.1")
   end
 
   def test_correct_add_last_ip
@@ -25,6 +28,5 @@ include Iplog
     assert_equal(Iplog.last_ip_from_log,"127.0.0.1")
     FileUtils.rm(Settings[:log_path])
   end
-
 
 end
