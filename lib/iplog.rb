@@ -9,15 +9,15 @@ module Iplog
    def configliere_setup(config_path=__dir__)
      Settings.read("#{config_path}/config.yaml")
      @@log_path = Settings[:log_path]
+     @@uri = generate_uri
    end
 
    def run_script(test=false,sleep_time = 60)
      generate_uri
      configliere_setup unless test
-     sleep_time = Settings[:sleep_time] unless Settings[:sleep_time].empty?
-
+     sleep_time = Settings[:sleep_time].to_i unless Settings[:sleep_time].empty?
      loop do
-     add_ip_to_log if last_ip_from_log != current_ip
+     add_ip_to_log if last_ip_from_log != current_ip(@@uri)
      sleep(sleep_time)
      end
 
@@ -29,8 +29,8 @@ module Iplog
      uri
    end
 
-   def current_ip
-     Net::HTTP.get(generate_uri)
+   def current_ip(uri)
+     Net::HTTP.get(uri)
    end
 
    def last_ip_from_log
@@ -38,7 +38,7 @@ module Iplog
    end
 
    def add_ip_to_log
-     File.open(@@log_path, "a+"){|f| f << "#{current_ip}\n" } 
+     File.open(@@log_path, "a+"){|f| f << "#{current_ip(@@uri)}\n" } 
    end
 
  end
