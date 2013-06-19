@@ -8,7 +8,7 @@ include Iplog
   Settings.read("#{__dir__}/config.yaml")
 
   def testrun_script
-    Iplog.run_script(true)
+    Iplog.run_script("test")
   end
 
   def test_Iplog
