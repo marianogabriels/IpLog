@@ -20,7 +20,6 @@ module Iplog
      add_ip_to_log if last_ip_from_log != current_ip(@@uri)
      sleep(sleep_time)
      end
-
    end
 
    def generate_uri
